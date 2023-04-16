@@ -8,8 +8,6 @@ This is an implementation of the Hangman game, where the computer thinks of a wo
 - In this project, we'll use GitHub to track changes to our code and save them online in a GitHub repo.
 An automated bot provided by AI Core automatically creates a new GitHub repo called "Hangman".
 
-<img src=".img1.png" alt="Getting started" />
-
 ## Milestone 2
 
 - This part of the project consists in instantiating the basic code for the hangman software. It is called milestone_2.py.
