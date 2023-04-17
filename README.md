@@ -35,3 +35,30 @@ if len(guess) == 1 and guess.isalpha == True:
 else:
     print("Oops! That is not a valid input.")
 ```
+
+## Milestone 3
+
+- The code is now organized into two main functions.
+
+1. ask_for_input iteratively asks the user to input a letter and checks if the input is compatible with the game requirements, i.e. whether the input is a single alphabetic character. If the check is passed, the second function *check_guess* is called.
+
+```python
+def ask_for_input():
+    while True:
+        guess = input("User, please input a letter: ")
+        if len(guess) == 1  or guess.isalpha() == True:
+            break
+        else:
+            print("Invalid letter. Please, enter a single alphabetical character.")
+    check_guess()
+```
+2. check_guess checks if the alphabetic variable requested by *ask_for_input* belongs to the word that has to be guessed.
+
+```python
+def check_guess(guess, word):
+    guess = guess.lower()
+    if guess in word:
+        print(f"Good guess: {guess} is in the word")
+    else:
+        print(f"Sorry, {guess} is not in the word")
+'''
