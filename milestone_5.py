@@ -1,28 +1,33 @@
 
-# Step 1. Create a function called play_game that takes word_list as a parameter. Inside the function, write the code for the following steps
+
+
+# Functions that allows to play the game by calling the defining the parameters and calling the class Hangman
 def play_game(word_list):
-    # Step 1. Create a variable called num_lives and assign it to 5.
+    # Define the numbers of lives for the game, then pass it as a parameter when instantiating Hangman
     num_lives = 5
-    # Step 2. Create an instance of the Hangman class.
-    # Do this by calling the Hangman class and assign it to a variable called game.
-    # Step 3. Pass word_list and num_lives as arguments to the game object.
+    # Create an instance of the Hangman class.
     game = Hangman(word_list=word_list, num_lives=num_lives)
-    # Step 4. Create a while loop and set the condition to True. In the body of the loop, do the following:
     while True:
-    # 1. Check if the <code>num_lives</code> is 0.
+        print(f"the number of lives is {game.num_lives}")
+        print(f"the number of letters is {game.num_letters}")
+    # Check if the player has any lives left
         if game.num_lives == 0:
-        # If it is, that means the game has ended and the user lost. Print a message saying 'You lost!'.
+            print(f"the number of lives is {game.num_lives}")
+            print(f"the number of letters is {game.num_letters}")
             print("You lost!")
-        # 2. Next, check if the <code>num_letters</code> is greater than 0.
-        # In this case, you would want to continue the game, so you need to call the <code>ask_for_input</code> method. 
+            break
+        # Check if num_letters is > 0, i.e. if there are any letters to be guessed
         if game.num_letters > 0:
+            # call the function that asks the player to input
+            print(f"the number of lives is {game.num_lives}")
+            print(f"the number of letters is {game.num_letters}")
             game.ask_for_input()
-        # 3. If the <code>num_lives</code> is not 0 and the <code>num_letters</code> is not greater than 0,
-        # that means the user has won the game. Print a message saying 'Congratulations. You won the game!'.
+        # if the user has still lives left and there is no letter to be guessed, then it won
         if game.num_lives != 0 and game.num_letters <= 0:
+            print(f"the number of lives is {game.num_lives}")
+            print(f"the number of letters is {game.num_letters}")
             print("Congratulations! You have won the game")
-    # Step 2. Outside the function, call your play_game function to play your game.
-    # Don't forget to pass in your list of words as argument to the function.
+
 
 
 import random
@@ -70,9 +75,9 @@ class Hangman:
             for idx in range(len(self.word)):
                 if guess == self.word[idx]:
                     self.word_guessed[idx] = guess
-            self.num_letters -= 1
+            self.num_letters += -1
         else:
-            self.num_lives -= 1
+            self.num_lives += -1
             print(f"Sorry, {guess} is not in the word")
             print(f"You have {self.num_lives} lives left")
         
@@ -91,5 +96,6 @@ class Hangman:
             self.list_of_guesses.append(guess)
 
 
-word_list = ["pear", "lemon", "orange", "cherry", "mulberry"]
-play_game(word_list=word_list)
+word_list = ["pera", "mela"]
+             #lemon", "orange", "cherry", "mulberry"]
+play_game(word_list)
