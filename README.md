@@ -61,4 +61,71 @@ def check_guess(guess, word):
         print(f"Good guess: {guess} is in the word")
     else:
         print(f"Sorry, {guess} is not in the word")
-'''
+```
+
+## Milestone 4
+- The code has been developed so to become so that the key functions now live under the Hangman class
+- The class methods have been extended in functionality
+
+1. The init method defines the attributes of the class. Details provided in the code below
+```python
+        """
+        self.word: the word to be guess. Initialized as a randomly picked word from word_list
+        word_guessed: initialised a list of underscores, in string format, of the same length of the word to be guessed
+            for each guessed letter, it will show the guessed letter in the correct place
+        num_letters: the number of unique letters in self.word
+        num_lives: initialises the number of lives, i.e. the wrong tentatives allowed before losing the game. Default = 5)
+        word_list: is a list of words that the user has to guess
+        list_of_guesses: a list of the guess letters that have already been tried. Initialized to an empty list. 
+        """
+        self.word = random.choice(word_list)
+        self.word_guessed =  ['_'] * len(self.word)
+        self.num_letters = len(set(self.word))
+        self.num_lives = num_lives
+        self.word_list = word_list
+        self.list_of_guesses = []
+```
+2. The check_guess method whether the guess appears in the word to be guessed.
+If the answer is "yes", it puts the guessed letter(s) in the position in  which they appear in the word.
+If not, it prints a message and diminishes the number of lives. Then is prints the number of lives left.
+```python
+    def check_guess(self, guess):
+        """
+        Checks if guess (alphabetical single letter) is in word (word to be guessed)
+        If guess is in word
+            updates word_guessed accordingly
+            diminishes num_letters by 1
+        If guess is NOT in word
+            reduces the number of lives
+        """
+        # convert to a lower case before comparison
+        guess = guess.lower()
+        if guess in self.word:
+            print(f"Good guess: {guess} is in the word")
+            for idx in range(len(self.word)):
+                if guess == self.word[idx]:
+                    self.word_guessed[idx] = guess
+            self.num_letters -= 1
+        else:
+            self.num_lives -= 1
+            print(f"Sorry, {guess} is not in the word")
+            print(f"You have {self.num_lives} left")
+```
+3. The ask_for_input method asks for an input and checks if the input is a single alphabetic value.
+It also check if the letter has been already guessed. If the checks are passed, it calls check_guess.
+Otheriwise it plots messages asking the user to enter the guess correctly.
+
+```python
+       def ask_for_input(self):
+        while True:
+            guess = input("User, please input a letter: ")
+            if len(guess) != 1 or guess.isalpha() == False:
+                print("Invalid letter. Please, enter a single alphabetical character.")
+            elif guess in self.list_of_guesses:
+                print("You already tried that letter!")
+            else:
+                # CONFIRM: please note that I am calling check_guess() as a method
+                self.check_guess(guess)
+        
+            self.list_of_guesses.append(guess)
+```
