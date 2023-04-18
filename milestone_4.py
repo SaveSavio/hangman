@@ -1,5 +1,3 @@
-# insert docstring here
-
 import random
 
 class Hangman:
@@ -13,12 +11,14 @@ class Hangman:
 
     def __init__(self, word_list, num_lives = 5) -> None: # need to remember how's this thing! called
         """
-        self.word: randomly picks a word to be guessed from word_list
-        word_guessed: initialises a list of underscores, in string format, of the same length of the word to be guessed
-        num_letters: the number of unique letters in the string to be guessed
-        num_lives: initialises the number of lives, i.e. the wrong tentatives allowed before losing the game (default = 5)
+        [Redundant] Defines the attributes of the class
+        self.word: the word to be guess. Initialized as a randomly picked word from word_list
+        word_guessed: initialised a list of underscores, in string format, of the same length of the word to be guessed
+            for each guessed letter, it will show the guessed letter in the correct place
+        num_letters: the number of unique letters in self.word
+        num_lives: initialises the number of lives, i.e. the wrong tentatives allowed before losing the game. Default = 5)
         word_list: is a list of words that the user has to guess
-        list_of_guesses: a list of the guesses that have already been tried. Set this to an empty list initially. 
+        list_of_guesses: a list of the guess letters that have already been tried. Initialized to an empty list. 
         """
         self.word = random.choice(word_list)
         self.word_guessed =  ['_'] * len(self.word)
@@ -29,22 +29,36 @@ class Hangman:
 
     def check_guess(self, guess):
         """
+        Checks if guess (alphabetical single letter) is in word (word to be guessed)
+        If guess is in word
+            updates word_guessed accordingly
+            diminishes num_letters by 1
+        If guess is NOT in word
+            reduces the number of lives
         """
+        # convert to a lower case before comparison
         guess = guess.lower()
         if guess in self.word:
             print(f"Good guess: {guess} is in the word")
-            # lambda x: x**2 if (x%2) == 0 else x**3
-
-        #else:
-        #   print(f"Sorry, {guess} is not in the word")
+            for idx in range(len(self.word)):
+                if guess == self.word[idx]:
+                    self.word_guessed[idx] = guess
+            self.num_letters -= 1
+        else:
+            self.num_lives -= 1
+            print(f"Sorry, {guess} is not in the word")
+            print(f"You have {self.num_lives} left")
+        
 
     def ask_for_input(self):
         while True:
             guess = input("User, please input a letter: ")
-            if guess.isalpha() == False:
+            if len(guess) != 1 or guess.isalpha() == False:
                 print("Invalid letter. Please, enter a single alphabetical character.")
             elif guess in self.list_of_guesses:
                 print("You already tried that letter!")
-            elif guess.isalpha() == True and guess not in self.list_of_guesses:
-                check_guess(guess)
-                self.list_of_guesses.append(guess)
+            else:
+                # CONFIRM: please note that I am calling check_guess() as a method
+                self.check_guess(guess)
+        
+            self.list_of_guesses.append(guess)
