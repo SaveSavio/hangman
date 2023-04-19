@@ -9,16 +9,17 @@ class Hangman:
         num_lives is the number of wrong tentative before losing the game (5 by default)
     """
 
-    def __init__(self, word_list, num_lives = 5) -> None: # need to remember how's this thing! called
+    def __init__(self, word_list, num_lives = 5): # need to remember how's this thing! called
         """
-        [Redundant] Defines the attributes of the class
-        self.word: the word to be guess. Initialized as a randomly picked word from word_list
-        word_guessed: initialised a list of underscores, in string format, of the same length of the word to be guessed
+        Attributes:
+            - word_list: is a list of words that the user has to guess
+            - list_of_guesses: a list of the guess letters that have already been tried. Initialized to an empty list. 
+        Initialization:
+            - self.word: the word to be guess. Initialized as a randomly picked word from word_list
+            - word_guessed: initialised a list of underscores, in string format, of the same length of the word to be guessed
             for each guessed letter, it will show the guessed letter in the correct place
-        num_letters: the number of unique letters in self.word
-        num_lives: initialises the number of lives, i.e. the wrong tentatives allowed before losing the game. Default = 5)
-        word_list: is a list of words that the user has to guess
-        list_of_guesses: a list of the guess letters that have already been tried. Initialized to an empty list. 
+            - num_letters: the number of unique letters in self.word
+            - num_lives: initialises the number of lives, i.e. the wrong tentatives allowed before losing the game. Default = 5)
         """
         self.word = random.choice(word_list)
         self.word_guessed =  ['_'] * len(self.word)
@@ -43,6 +44,7 @@ class Hangman:
             for idx in range(len(self.word)):
                 if guess == self.word[idx]:
                     self.word_guessed[idx] = guess
+                    print(f"Index: {idx}, self.word_guessed: {self.word_guessed}")
             self.num_letters -= 1
         else:
             self.num_lives -= 1
