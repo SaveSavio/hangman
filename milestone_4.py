@@ -62,5 +62,4 @@ class Hangman:
             else:
                 # CONFIRM: please note that I am calling check_guess() as a method
                 self.check_guess(guess)
-        
-            self.list_of_guesses.append(guess)
+                self.list_of_guesses.append(guess)
