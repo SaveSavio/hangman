@@ -89,7 +89,7 @@ def check_guess(guess, word):
 If the answer is "yes", it puts the guessed letter(s) in the position in  which they appear in the word.
 If not, it prints a message and diminishes the number of lives. Then is prints the number of lives left.
 ```python
-    def check_guess(self, guess):
+   def check_guess(self, guess):
         """
         Checks if guess (alphabetical single letter) is in word (word to be guessed)
         If guess is in word
@@ -105,7 +105,9 @@ If not, it prints a message and diminishes the number of lives. Then is prints t
             for idx in range(len(self.word)):
                 if guess == self.word[idx]:
                     self.word_guessed[idx] = guess
+                    print(f"Index: {idx}, self.word_guessed: {self.word_guessed}")
             self.num_letters -= 1
+            print(f"self.num_letters: {self.num_letters}")
         else:
             self.num_lives -= 1
             print(f"Sorry, {guess} is not in the word")
@@ -116,7 +118,7 @@ It also check if the letter has been already guessed. If the checks are passed, 
 Otheriwise it plots messages asking the user to enter the guess correctly.
 
 ```python
-       def ask_for_input(self):
+           def ask_for_input(self):
         while True:
             guess = input("User, please input a letter: ")
             if len(guess) != 1 or guess.isalpha() == False:
@@ -126,6 +128,7 @@ Otheriwise it plots messages asking the user to enter the guess correctly.
             else:
                 # CONFIRM: please note that I am calling check_guess() as a method
                 self.check_guess(guess)
-        
-            self.list_of_guesses.append(guess)
+                self.list_of_guesses.append(guess)
+                return
+            return
 ```
