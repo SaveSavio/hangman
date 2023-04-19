@@ -35,3 +35,6 @@ def check_guess(word, guess, word_guessed,num_letters ):
             print(f"You have {num_lives} left")
 
 check_guess(word=word, guess="a") 
+
+parola = "Ciao"
+parola[0].lower()

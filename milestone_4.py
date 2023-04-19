@@ -46,6 +46,7 @@ class Hangman:
                     self.word_guessed[idx] = guess
                     print(f"Index: {idx}, self.word_guessed: {self.word_guessed}")
             self.num_letters -= 1
+            print(f"self.num_letters: {self.num_letters}")
         else:
             self.num_lives -= 1
             print(f"Sorry, {guess} is not in the word")
